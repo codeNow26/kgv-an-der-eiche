@@ -1,0 +1,564 @@
+.club-intro {
+  padding-top: 24px;
+}
+
+.club-intro__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr);
+  align-items: center;
+  gap: clamp(36px, 6vw, 90px);
+}
+
+.club-intro__copy,
+.club-photo {
+  min-width: 0;
+}
+
+.club-intro__accent {
+  color: #637b45;
+}
+
+.club-intro .page-lead {
+  color: #59665d;
+}
+
+.club-photo {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 0 0 auto;
+}
+
+.club-photo__composition {
+  position: relative;
+  isolation: isolate;
+}
+
+.club-photo__frame {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border-radius: 46% 54% 12px 12px / 33% 38% 12px 12px;
+  background: #dce5ce;
+}
+
+.club-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+}
+
+.club-photo figcaption {
+  position: relative;
+  margin-top: 22px;
+  color: #59665d;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* The branch emerges from behind the photo. */
+.club-photo__branch {
+  position: absolute;
+  z-index: 0;
+  bottom: -12px;
+  left: -92px;
+  width: 180px;
+  height: 225px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.club-photo__branch-sway {
+  transform-box: view-box;
+  transform-origin: 86% 94%;
+  animation: club-branch-sway 9s ease-in-out infinite;
+}
+
+.club-photo__branch-wood {
+  fill: none;
+  stroke: #827457;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.club-photo__leaf {
+  color: #71865c;
+}
+
+.club-photo__leaf--light {
+  color: #96a27b;
+}
+
+.club-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 70px 0 40px;
+  padding-top: 30px;
+  border-top: 1px solid #d5d9c9;
+}
+
+.club-facts__item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.club-facts dt {
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.club-facts dd {
+  order: -1;
+  margin: 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(42px, 5vw, 68px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+.club-facts dd span {
+  margin-left: 10px;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+.club-intro > .page-wave {
+  color: var(--page-green);
+}
+
+.club-story {
+  background: var(--page-green);
+  color: #fff4df;
+}
+
+.club-story__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.3fr);
+  align-items: center;
+  gap: clamp(40px, 8vw, 120px);
+  padding-block: 55px 25px;
+}
+
+.club-story__date {
+  width: fit-content;
+  max-width: 100%;
+  color: #dce5b0;
+}
+
+.club-story__date > span {
+  display: block;
+  margin-bottom: 20px;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 20px;
+}
+
+.club-story__date strong {
+  display: block;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(65px, 8vw, 112px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.06em;
+}
+
+.club-story__roots {
+  display: block;
+  width: 78%;
+  max-width: 260px;
+  height: auto;
+  margin: -10px auto 0;
+  color: #c1cc99;
+  pointer-events: none;
+}
+
+.club-story__roots-main,
+.club-story__roots-fine {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.club-story__roots-main {
+  stroke-width: 2.4;
+  opacity: 0.75;
+}
+
+.club-story__roots-fine {
+  stroke-width: 1.3;
+  opacity: 0.5;
+}
+
+.club-story__copy {
+  max-width: 610px;
+  padding-bottom: 25px;
+}
+
+.club-story__copy > p:not(.page-eyebrow) {
+  max-width: 530px;
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.club-story .page-eyebrow {
+  color: #dce5b0;
+}
+
+.club-story .page-text-link {
+  margin-top: 8px;
+  color: #f2be91;
+}
+
+.club-story > .page-wave {
+  color: var(--page-cream);
+}
+
+.club-invitation {
+  padding-block: 24px 90px;
+}
+
+.club-invitation__inner {
+  text-align: center;
+}
+
+.club-invitation .page-lead {
+  margin-inline: auto;
+  color: #59665d;
+}
+
+.club-invitation .page-actions {
+  justify-content: center;
+}
+
+.club-gate-link {
+  position: relative;
+  display: block;
+  width: 180px;
+  margin: 0 auto 28px;
+  border-radius: 14px;
+  color: var(--page-green);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.club-gate-link:focus-visible {
+  outline: 2px solid #a65a28;
+  outline-offset: 5px;
+}
+
+.club-gate {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.club-gate__ground,
+.club-gate__plants {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.club-gate__ground {
+  stroke: #c4ccb5;
+  stroke-width: 2;
+}
+
+.club-gate__plants {
+  stroke: #819465;
+  stroke-width: 2.5;
+}
+
+.club-gate__posts {
+  fill: #66794e;
+}
+
+.club-gate__boards {
+  fill: #8c9c70;
+  stroke: #647a4f;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+
+.club-gate__rails {
+  fill: none;
+  stroke: #536e45;
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+/* Keep the left hinge fixed throughout the opening movement. */
+.club-gate__door {
+  transform-box: view-box;
+  transform-origin: 65px 90px;
+  transform: skewY(0deg) scaleX(1);
+  transition: transform 550ms ease-in-out;
+}
+
+.club-gate-link:hover .club-gate__door,
+.club-gate-link:focus-visible .club-gate__door,
+.club-invitation__inner:has(.page-button:hover) .club-gate__door,
+.club-invitation__inner:has(.page-button:focus-visible) .club-gate__door {
+  transform: skewY(-10deg) scaleX(0.62);
+}
+
+.club-gate-link__caption {
+  position: absolute;
+  z-index: 2;
+  top: 100%;
+  left: 50%;
+  width: max-content;
+  padding: 5px 10px;
+  border: 1px solid #d5d9c9;
+  border-radius: 6px;
+  background: #fffaf1;
+  color: var(--page-green);
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -3px);
+  transition:
+    opacity 180ms ease,
+    visibility 180ms ease,
+    transform 180ms ease;
+}
+
+.club-gate-link:hover .club-gate-link__caption,
+.club-gate-link:focus-visible .club-gate-link__caption {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+@keyframes club-branch-sway {
+  0%,
+  100% {
+    transform: rotate(-1deg);
+  }
+
+  50% {
+    transform: rotate(1.5deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .club-intro__layout {
+    gap: 32px;
+  }
+
+  .club-photo__branch {
+    left: -52px;
+    width: 140px;
+    height: 175px;
+  }
+
+  .club-story__layout {
+    gap: 40px;
+  }
+
+  .club-story__date strong {
+    font-size: 76px;
+  }
+}
+
+@media (max-width: 700px) {
+  .club-intro {
+    padding-top: 12px;
+  }
+
+  .club-intro__layout,
+  .club-story__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .club-photo {
+    width: calc(100% - 48px);
+    max-width: 300px;
+    margin: 10px 0 0 auto;
+  }
+
+  .club-photo__branch {
+    left: -48px;
+    bottom: -8px;
+    width: 130px;
+    height: 163px;
+  }
+
+  .club-facts {
+    gap: 12px;
+    margin-top: 50px;
+    padding-top: 24px;
+  }
+
+  .club-facts dd {
+    font-size: clamp(32px, 8vw, 46px);
+  }
+
+  .club-facts dd span {
+    display: block;
+    margin: 5px 0 0;
+    font-size: 16px;
+  }
+
+  .club-facts dt {
+    font-size: 17px;
+  }
+
+  .club-story__layout {
+    gap: 26px;
+    padding-block: 36px 35px;
+  }
+
+  .club-story__date > span {
+    margin-bottom: 12px;
+  }
+
+  .club-story__date strong {
+    font-size: clamp(48px, 12vw, 72px);
+  }
+
+  .club-story__roots {
+    width: 90%;
+    margin-top: -6px;
+  }
+
+  .club-story__copy {
+    padding-bottom: 0;
+  }
+
+  .club-story__copy > p:not(.page-eyebrow) {
+    font-size: 17px;
+  }
+
+  .club-invitation {
+    padding-block: 15px 60px;
+  }
+
+  .club-gate-link {
+    width: 150px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .club-photo__branch-sway {
+    animation: none;
+  }
+
+  .club-gate__door,
+  .club-gate-link__caption {
+    transition: none;
+  }
+}
+
+/* Foundation emblem */
+.club-story__date {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: none;
+}
+
+.club-foundation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 290px);
+  min-height: 350px;
+  padding: 42px 24px;
+  border: 1px solid rgb(220 229 176 / 48%);
+  border-radius: 50%;
+  color: #dce5b0;
+  text-align: center;
+}
+
+.club-foundation__label {
+  margin-bottom: 22px;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.club-foundation__date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.club-foundation__day {
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.club-foundation__year {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(64px, 6vw, 88px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.055em;
+}
+
+.club-foundation__acorn {
+  display: block;
+  width: 25px;
+  height: 31px;
+  margin-top: 24px;
+  color: #b8c594;
+}
+
+.club-story__copy {
+  padding-bottom: 0;
+}
+
+.club-story__layout {
+  padding-block: 55px 50px;
+}
+
+@media (max-width: 700px) {
+  .club-foundation {
+    width: 240px;
+    min-height: 290px;
+    padding: 32px 20px;
+  }
+
+  .club-foundation__label {
+    margin-bottom: 16px;
+    font-size: 16px;
+  }
+
+  .club-foundation__day {
+    font-size: 23px;
+  }
+
+  .club-foundation__year {
+    font-size: 72px;
+  }
+
+  .club-foundation__acorn {
+    margin-top: 18px;
+  }
+
+  .club-story__layout {
+    gap: 36px;
+    padding-block: 36px 40px;
+  }
+}

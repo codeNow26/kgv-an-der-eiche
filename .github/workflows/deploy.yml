@@ -1,3 +1,4 @@
+
 name: Deploy Gartenverein to IONOS
 
 on:
@@ -13,16 +14,6 @@ jobs:
     steps:
       - name: Repository herunterladen
         uses: actions/checkout@v4
-        
-      - name: SSH Host-Key vorbereiten
-        env:
-          SFTP_HOST: ${{ secrets.SFTP_HOST }}
-        run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          ssh-keyscan -p 22 -H "$SFTP_HOST" > /tmp/ionos_host_keys
-          ssh-keygen -lf /tmp/ionos_host_keys
-
 
       - name: SFTP Deployment
         env:
@@ -30,12 +21,18 @@ jobs:
           SFTP_USERNAME: ${{ secrets.SFTP_USERNAME }}
           SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
         run: |
-          sudo apt-get update
           sudo apt-get install -y lftp
+
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan -p 22 -H "$SFTP_HOST" \
+            2>/dev/null > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
 
           lftp -u "$SFTP_USERNAME","$SFTP_PASSWORD" \
             "sftp://$SFTP_HOST:22" <<'EOF'
           set sftp:auto-confirm no
+          set net:max-retries 2
           mirror --reverse --verbose \
             --exclude-glob .git/ \
             --exclude-glob .github/ \

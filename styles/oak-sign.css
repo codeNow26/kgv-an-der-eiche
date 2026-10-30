@@ -1,0 +1,431 @@
+.oak-sign {
+  --sign-width: 360px;
+  --cord-length: 93px;
+
+  position: absolute;
+  z-index: 7;
+
+  /* Fallback position until the image coordinates are available. */
+  left: clamp(56px, 7.8vw, 164px);
+  top: clamp(180px, 25.5vw, 265px);
+
+  width: var(--sign-width);
+  height: 245px;
+  pointer-events: none;
+}
+
+.oak-sign__swing {
+  position: relative;
+
+  /* Keep the board margin inside the swing container. */
+  display: flow-root;
+
+  width: 100%;
+  transform-origin: 50% 0%;
+  transform: rotate(-2deg);
+  transition: transform 750ms cubic-bezier(0.22, 0.9, 0.24, 1);
+  pointer-events: none;
+}
+
+.oak-sign:hover .oak-sign__swing,
+.oak-sign:focus-within .oak-sign__swing {
+  animation: oak-sign-sway 2.3s ease-in-out both;
+}
+
+.oak-sign__cord {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  width: 2px;
+  height: var(--cord-length);
+  background: linear-gradient(90deg, #635039, #ae8a5f);
+  box-shadow: 1px 1px 1px #332a21aa;
+  transform-origin: top center;
+  pointer-events: none;
+}
+
+.oak-sign__cord--left {
+  left: 18%;
+  transform: rotate(-8deg);
+}
+
+.oak-sign__cord--right {
+  right: 18%;
+  transform: rotate(8deg);
+}
+
+.oak-sign .oak-sign__board {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  width: 100%;
+  min-height: 112px;
+  margin-top: var(--cord-length);
+  padding: 18px 22px 17px 17px;
+  overflow: visible;
+  border: 1px solid rgb(119 82 48 / 72%);
+  border-radius: 6px 8px 7px 7px;
+  background:
+    radial-gradient(
+      ellipse at 17% 15%,
+      rgb(255 255 255 / 22%),
+      transparent 62%
+    ),
+    repeating-linear-gradient(
+      177deg,
+      transparent 0 13px,
+      rgb(99 72 46 / 4%) 14px 15px,
+      transparent 16px 37px,
+      rgb(111 81 47 / 4.5%) 38px 39px,
+      transparent 40px 65px
+    ),
+    linear-gradient(
+      104deg,
+      #e9d7b9 0%,
+      #e6d0ad 42%,
+      #ddc39d 75%,
+      #d8b98e 100%
+    );
+  color: #173b2a;
+  text-decoration: none;
+  box-shadow:
+    0 3px 0 rgb(111 75 43 / 43%),
+    0 12px 20px rgb(26 36 22 / 18%),
+    inset 0 1px 0 rgb(255 255 255 / 43%),
+    inset 0 -2px 0 rgb(101 73 44 / 7%);
+  pointer-events: auto;
+}
+
+.oak-sign__board::before,
+.oak-sign__board::after {
+  position: absolute;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #735a3d;
+  box-shadow: inset 1px 1px 2px rgb(35 23 14 / 55%);
+  content: "";
+}
+
+.oak-sign__board::before {
+  left: 17%;
+}
+
+.oak-sign__board::after {
+  right: 17%;
+}
+
+.oak-sign .brand-oak-logo {
+  display: block;
+  flex-shrink: 0;
+  width: 85px;
+  min-width: 85px;
+  height: 76px;
+  margin: 0;
+  overflow: visible;
+}
+
+.oak-sign .oak-sign__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.oak-sign .brand-name {
+  display: block;
+  margin: 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+}
+
+.oak-sign .brand-caption {
+  display: block;
+  margin: 0;
+  color: #5f503d;
+  font: 600 16px / 1.2 "Barlow Condensed", Arial, sans-serif;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* Origins use the coordinate system of the inline SVG. */
+.oak-sign .brand-logo__leaf,
+.oak-sign .brand-logo__acorn,
+.oak-sign .brand-logo__new-leaf {
+  transform-box: view-box;
+}
+
+.oak-sign .brand-logo__leaf--big {
+  transform-origin: 180px 218px;
+}
+
+.oak-sign .brand-logo__leaf--small {
+  transform-origin: 169px 246px;
+}
+
+.oak-sign .brand-logo__acorn {
+  transform-origin: 311px 193px;
+}
+
+.oak-sign .brand-logo__new-stem {
+  stroke-dasharray: 46;
+  stroke-dashoffset: 46;
+  transition: stroke-dashoffset 420ms ease;
+}
+
+.oak-sign .brand-logo__new-leaf {
+  transform-origin: 344px 124px;
+  transform: scale(0.05) rotate(-20deg);
+  opacity: 0;
+  transition:
+    transform 520ms cubic-bezier(0.22, 1.5, 0.45, 1),
+    opacity 300ms ease;
+}
+
+.oak-sign .brand:is(:hover, :focus-visible) .brand-logo__leaf--big {
+  animation: oak-leaf-big 850ms ease-in-out both;
+}
+
+.oak-sign .brand:is(:hover, :focus-visible) .brand-logo__leaf--small {
+  animation: oak-leaf-small 1s ease-in-out 50ms both;
+}
+
+.oak-sign .brand:is(:hover, :focus-visible) .brand-logo__acorn {
+  animation: oak-acorn-fall 1.65s linear 100ms both;
+}
+
+.oak-sign .brand:is(:hover, :focus-visible) .brand-logo__new-stem {
+  stroke-dashoffset: 0;
+  transition-delay: 120ms;
+}
+
+.oak-sign .brand:is(:hover, :focus-visible) .brand-logo__new-leaf {
+  transform: scale(1);
+  opacity: 1;
+  transition-delay: 320ms;
+}
+
+@keyframes oak-sign-sway {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+
+  18% {
+    transform: rotate(3.5deg);
+  }
+
+  43% {
+    transform: rotate(-2.9deg);
+  }
+
+  68% {
+    transform: rotate(1.5deg);
+  }
+}
+
+@keyframes oak-leaf-big {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  30% {
+    transform: rotate(-8deg);
+  }
+
+  65% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes oak-leaf-small {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  30% {
+    transform: rotate(12deg);
+  }
+
+  65% {
+    transform: rotate(-5deg);
+  }
+}
+
+@keyframes oak-acorn-fall {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  12% {
+    transform: translate(0, 0) rotate(-10deg);
+  }
+
+  23% {
+    transform: translate(0, 0) rotate(9deg);
+  }
+
+  32% {
+    transform: translate(0, 0) rotate(-5deg);
+    animation-timing-function: cubic-bezier(0.45, 0, 1, 0.8);
+  }
+
+  67% {
+    transform: translate(37px, 220px) rotate(58deg) scale(1.06, 0.94);
+    animation-timing-function: cubic-bezier(0.2, 0, 0.25, 1);
+  }
+
+  77% {
+    transform: translate(42px, 182px) rotate(72deg);
+    animation-timing-function: ease-in;
+  }
+
+  88% {
+    transform: translate(49px, 220px) rotate(87deg) scale(1.05, 0.95);
+    animation-timing-function: ease-out;
+  }
+
+  94% {
+    transform: translate(51px, 209px) rotate(93deg);
+  }
+
+  100% {
+    transform: translate(53px, 220px) rotate(96deg);
+  }
+}
+
+@media (min-width: 1151px) {
+  .oak-sign.oak-sign--anchored {
+    top: 0;
+    left: 0;
+    transform:
+      translate3d(var(--oak-image-x), var(--oak-image-y), 0)
+      scale(var(--oak-image-scale));
+    transform-origin: top left;
+  }
+}
+
+@media (max-width: 1150px) {
+  .oak-sign {
+    --sign-width: 315px;
+    --cord-length: 0px;
+
+    top: 125px;
+    left: 22px;
+    height: auto;
+  }
+
+  .oak-sign__cord {
+    display: none;
+  }
+
+  .oak-sign__swing {
+    transform: none;
+  }
+
+  .oak-sign:hover .oak-sign__swing,
+  .oak-sign:focus-within .oak-sign__swing {
+    animation: none;
+  }
+
+  .oak-sign .oak-sign__board {
+    min-height: 88px;
+    gap: 10px;
+    padding: 9px 14px 9px 9px;
+    border-color: #ab8559;
+    background: linear-gradient(110deg, #ead9bb, #dfc5a0);
+    box-shadow: 0 8px 18px #173b2a2c;
+  }
+
+  .oak-sign .brand-oak-logo {
+    width: 70px;
+    min-width: 70px;
+    height: 60px;
+  }
+
+  .oak-sign .brand-name {
+    font-size: 21px;
+  }
+
+  .oak-sign .brand-caption {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 700px) {
+  .oak-sign {
+    --sign-width: min(300px, calc(100vw - 32px));
+
+    top: 85px;
+    left: 16px;
+  }
+
+  .oak-sign .oak-sign__board {
+    min-height: 76px;
+    gap: 8px;
+  }
+
+  .oak-sign .brand-oak-logo {
+    width: 64px;
+    min-width: 64px;
+    height: 54px;
+  }
+
+  .oak-sign .brand-name {
+    font-size: 19px;
+  }
+
+  .oak-sign .brand-caption {
+    font-size: 13px;
+  }
+}
+
+/* Hide the suspension when the image anchor is outside the visible crop. */
+.oak-sign.oak-sign--detached {
+  --sign-width: 315px;
+  --cord-length: 0px;
+
+  top: 125px;
+  left: 22px;
+  height: auto;
+  transform: none;
+}
+
+.oak-sign--detached .oak-sign__cord {
+  display: none;
+}
+
+.oak-sign--detached .oak-sign__swing {
+  transform: none;
+}
+
+.oak-sign--detached:hover .oak-sign__swing,
+.oak-sign--detached:focus-within .oak-sign__swing {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oak-sign__swing,
+  .oak-sign .brand-logo__new-stem,
+  .oak-sign .brand-logo__new-leaf {
+    transition: none;
+  }
+
+  .oak-sign:hover .oak-sign__swing,
+  .oak-sign:focus-within .oak-sign__swing,
+  .oak-sign .brand:is(:hover, :focus-visible) .brand-logo__leaf,
+  .oak-sign .brand:is(:hover, :focus-visible) .brand-logo__acorn {
+    animation: none;
+  }
+}

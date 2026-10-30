@@ -2,221 +2,590 @@
 <html lang="de">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Kleingartenverein An der Eiche in Hoyerswerda: Informationen zum Verein, Termine und freie Gärten.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="Kleingartenverein An der Eiche in Hoyerswerda: Informationen zum Verein, Termine und freie Gärten.">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>An der Eiche | Kleingartenverein Hoyerswerda</title>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Caveat:wght@600;700&display=swap"
-        rel="stylesheet">
 
-    <title>An der Eiche | Kleingartenverein Hoyerswerda</title>
-    <link rel="stylesheet" href="./style.css">
-    <script src="./script.js" defer></script>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/lenis@1.3.27/dist/lenis.css"
+>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Caveat:wght@600;700&family=Fraunces:wght@700;800;900&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./styles/hero.css">
+  <link rel="stylesheet" href="./styles/oak-branch.css">
+  <link rel="stylesheet" href="./styles/sections.css">
+  <link rel="stylesheet" href="./styles/oak-sign.css">
+
+  <script src="./script.js" defer></script>
+  <script src="./oak-sign-position.js" defer></script>
+
+  <!-- Animation dependencies must load before oak-branch.js. -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/DrawSVGPlugin.min.js" defer></script>
+  <script src="./oak-branch.js" defer></script>
+  <!-- Lenis laden; nach den GSAP-Bibliotheken verfügbar -->
+  <script src="https://unpkg.com/lenis@1.3.27/dist/lenis.min.js" defer></script>
+  <script>
+   
+document.addEventListener("DOMContentLoaded", () => {
+  if (
+    typeof Lenis === "undefined" ||
+    typeof gsap === "undefined" ||
+    typeof ScrollTrigger === "undefined"
+  ) return;
+
+  const lenis = new Lenis({
+    lerp: 0.12,
+    smoothWheel: true,
+    autoRaf: false,
+    anchors: true
+  });
+
+  lenis.on("scroll", ScrollTrigger.update);
+
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+
+  gsap.ticker.lagSmoothing(0);
+
+  window.addEventListener("load", () => {
+    ScrollTrigger.refresh();
+  }, { once: true });
+});
+
+  </script>
 </head>
 
 <body>
-    <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+  <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
 
-    <header class="site-header">
-        <div class="container header-inner">
-            <a class="brand" href="./index.html" aria-label="An der Eiche – Startseite">
-                <svg class="brand-symbol" viewBox="0 0 80 100" aria-hidden="true">
-                    <use href="#oak-leaf"></use>
-                </svg>
-                <span>
-                    <span class="brand-name">An der Eiche</span>
-                    <span class="brand-caption">Kleingartenverein · Hoyerswerda</span>
-                </span>
+  <header class="site-header">
+    <div class="container header-inner">
+      <button class="menu-toggle" type="button"
+        aria-expanded="false" aria-controls="main-navigation" hidden>
+        Menü <span aria-hidden="true">☰</span>
+      </button>
+
+      <nav id="main-navigation" class="main-navigation" aria-label="Hauptnavigation">
+        <a href="./verein.html">Unser Verein</a>
+        <a href="./aktuelles.html">Aktuelles &amp; Termine</a>
+        <a href="./gaerten.html">Freie Gärten</a>
+        <a href="./kontakt.html">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inhalt" tabindex="-1">
+    <section class="garden-hero" aria-labelledby="garden-title">
+      <div class="garden-hero__stage">
+        <img class="garden-hero__image"
+          src="./assets/images/hero/hero-oak.png"
+          alt="" width="1536" height="1024" fetchpriority="high">
+
+        <div class="oak-sign">
+          <div class="oak-sign__swing">
+            <span class="oak-sign__cord oak-sign__cord--left" aria-hidden="true"></span>
+            <span class="oak-sign__cord oak-sign__cord--right" aria-hidden="true"></span>
+
+            <a class="brand oak-sign__board" href="./index.html"
+              aria-label="An der Eiche – Startseite, 114 Kleingärten auf 5,2 Hektar">
+              <svg class="brand-symbol brand-oak-logo"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 33 400 300" aria-hidden="true" focusable="false">
+                <defs>
+                  <g id="brand-oak-leaf-shape">
+                    <path
+                      d="M0 0 C-7-18-20-30-38-42 C-60-46-70-61-58-74 C-81-85-80-103-59-106 C-75-122-63-138-44-133 C-48-153-27-165-12-152 C-7-173 9-175 17-156 C36-161 47-145 37-129 C60-136 71-119 57-104 C81-103 83-83 60-74 C73-55 57-43 39-43 C17-29 7-13 0 0Z"
+                      fill="currentColor" />
+                    <path
+                      d="M0-8 C-3-53 0-104 3-148 M-2-40 L-44-61 M0-63 L46-91 M0-89 L-43-111 M2-118 L29-140"
+                      fill="none" stroke="#e3e1b3" stroke-width="5"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </g>
+                </defs>
+
+                <path d="M176 221 C220 232 267 221 306 191 C319 180 326 168 332 151"
+                  fill="none" stroke="#6b5037" stroke-width="10" stroke-linecap="round" />
+                <path d="M204 223 C196 233 182 247 165 252"
+                  fill="none" stroke="#6b5037" stroke-width="6" stroke-linecap="round" />
+
+                <g class="brand-logo__leaf brand-logo__leaf--big">
+                  <g transform="translate(180 218) rotate(-48) scale(1.24)" style="color: #173b2a">
+                    <use href="#brand-oak-leaf-shape" />
+                  </g>
+                </g>
+
+                <g class="brand-logo__leaf brand-logo__leaf--small">
+                  <g transform="translate(169 246) rotate(-119) scale(0.72)" style="color: #5c7b48">
+                    <use href="#brand-oak-leaf-shape" />
+                  </g>
+                </g>
+
+                <g class="brand-logo__acorn">
+                  <path d="M311 193 Q315 215 326 224"
+                    fill="none" stroke="#6b5037" stroke-width="6" stroke-linecap="round" />
+                  <path
+                    d="M294 228 C294 212 315 207 336 211 C356 214 372 226 371 250 C370 275 350 303 331 314 C326 317 323 320 320 325 C316 318 311 314 304 308 C289 294 281 268 287 246 C289 239 292 232 294 228Z"
+                    fill="#a76c3e" />
+                  <path d="M347 225 C359 235 361 250 354 270 C348 285 340 294 331 301"
+                    fill="none" stroke="#d9a36d" stroke-width="9"
+                    stroke-linecap="round" opacity="0.82" />
+                  <path
+                    d="M284 237 C285 219 296 205 312 202 C337 197 362 208 376 231 C377 236 374 239 369 240 C351 228 321 220 290 243 C285 247 281 243 284 237Z"
+                    fill="#173b2a" />
+                  <path
+                    d="M300 218 Q305 215 310 219 M319 211 Q325 208 332 213 M343 218 Q348 217 353 222 M293 230 Q297 225 304 227 M319 223 Q325 219 331 223 M342 230 Q350 227 357 232"
+                    fill="none" stroke="#688653" stroke-width="4" stroke-linecap="round" />
+                </g>
+
+                <path class="brand-logo__new-stem" d="M332 151 Q340 142 344 124"
+                  fill="none" stroke="#6b5037" stroke-width="5" stroke-linecap="round" />
+
+                <g class="brand-logo__new-leaf">
+                  <g transform="translate(344 124) rotate(62) scale(0.24)" style="color: #779a57">
+                    <use href="#brand-oak-leaf-shape" />
+                  </g>
+                </g>
+              </svg>
+
+              <span class="oak-sign__copy">
+                <span class="brand-name">114 Kleingärten</span>
+                <span class="brand-caption">auf 5,2 Hektar</span>
+              </span>
             </a>
-
-            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation" hidden>
-                Menü <span aria-hidden="true">☰</span>
-            </button>
-
-            <nav id="main-navigation" class="main-navigation" aria-label="Hauptnavigation">
-                <a href="#verein">Unser Verein</a>
-                <a href="#aktuelles">Aktuelles & Termine</a>
-                <a href="#gaerten">Freie Gärten</a>
-                <a href="#kontakt">Kontakt</a>
-            </nav>
+          </div>
         </div>
-    </header>
 
-    <main id="inhalt">
-        <section id="verein" class="hero container" aria-labelledby="hero-title">
-            <div class="hero-copy">
-                <p class="eyebrow hero-eyebrow">
-                    DRECK AN DEN HÄNDEN.
-                </p>
+        <div class="garden-hero__content">
+          <p class="garden-hero__eyebrow">Kleingartenverein · Hoyerswerda</p>
 
-                <h1 id="hero-title" class="hero-title">
-                    <span class="hero-title-main">
-                        <span>KLEINGARTEN</span>
-                        <span>VEREIN</span>
-                    </span>
+          <h1 id="garden-title" class="garden-hero__title">
+            <img class="garden-hero__wordmark"
+              src="./assets/images/an-der-eiche-schriftzug.png"
+              alt="An der Eiche">
+          </h1>
 
-                    <span class="hero-title-script">
-                        <span class="hero-brush" aria-hidden="true"></span>
-                        <span class="hero-script-text">An der Eiche</span>
-                    </span>
-                </h1>
-                <p class="hero-description">
-                    Willkommen bei unserem Kleingartenverein.
-                    Hier entsteht der neue Internetauftritt von „An der Eiche“.
-                </p>
-                <a class="button button-primary" href="#aktuelles">
-                    Den Verein entdecken <span aria-hidden="true">↗</span>
-                </a>
-            </div>
+          <p class="garden-hero__tagline">Ein grünes Stück Heimat seit 1990</p>
 
+          <a class="garden-hero__button" href="./verein.html">
+            Unseren Verein kennenlernen
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
 
-            
-<div class="hero-artwork">
-  <div class="editorial-collage">
+        <svg class="garden-hero__wave" viewBox="0 0 1440 140"
+          preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 74 C220 27 360 35 580 70 C820 120 1070 15 1440 65 V140 H0 Z"
+            fill="currentColor" />
+        </svg>
+      </div>
 
-    <!-- Papier hinter dem Foto -->
-    <div class="editorial-paper" aria-hidden="true"></div>
+      <!-- Keep animated paths inline so GSAP can access each element. -->
+      <div class="garden-hero__branch" aria-hidden="true">
+        <svg class="oak-branch__svg" viewBox="0 0 440 740"
+          xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <defs>
+            <g id="growing-oak-leaf-a">
+              <path
+                d="M0 0 C-4 -8 -12 -9 -17 -16 C-21 -22 -18 -27 -12 -28
+                C-24 -28 -30 -33 -27 -40 C-24 -46 -16 -44 -13 -47
+                C-22 -50 -22 -58 -15 -61 C-10 -64 -5 -60 0 -70
+                C5 -60 11 -64 16 -59 C23 -54 19 -48 13 -46
+                C23 -45 29 -42 26 -35 C23 -29 17 -29 12 -28
+                C20 -23 21 -19 16 -15 C11 -10 4 -8 0 0Z"
+                fill="currentColor" />
+              <path d="M0 -3 V-61 M-1 -22 L-13 -33 M1 -28 L15 -39 M0 -43 L-11 -53 M1 -49 L12 -56"
+                fill="none" stroke="#314d34" stroke-width="1.45"
+                stroke-linecap="round" opacity="0.44" />
+            </g>
 
-    <!-- Gartenfoto -->
-    <div class="editorial-photo">
-      <img
-        src="./assets/images/hero6.jpg"
-        alt="Üppig bepflanzter Garten mit Gemüsebeeten"
-      >
-    </div>
+            <g id="growing-oak-leaf-b">
+              <path
+                d="M0 0 C-7 -7 -15 -11 -17 -17 C-19 -21 -17 -26 -11 -28
+                C-24 -26 -28 -35 -23 -40 C-19 -44 -14 -41 -11 -46
+                C-18 -52 -16 -57 -11 -60 C-7 -62 -4 -60 1 -68
+                C6 -60 9 -61 13 -58 C19 -53 17 -48 12 -45
+                C25 -45 27 -38 23 -33 C20 -28 15 -28 11 -28
+                C17 -23 19 -19 14 -14 C9 -10 4 -8 0 0Z"
+                fill="currentColor" />
+              <path d="M0 -3 L1 -59 M0 -22 L-13 -34 M1 -27 L15 -36 M1 -43 L-9 -53 M2 -49 L11 -55"
+                fill="none" stroke="#314d34" stroke-width="1.3"
+                stroke-linecap="round" opacity="0.4" />
+            </g>
+          </defs>
 
-    <!-- Halbtransparentes Klebeband -->
-    <div class="editorial-tape" aria-hidden="true"></div>
+          <g class="oak-branch__wood">
+            <path class="oak-branch__stroke" data-start="0" data-end="0.36"
+              d="M-35 4 C13 38 34 71 44 113 C57 171 75 190 93 247"
+              stroke="#665b43" stroke-width="9" />
+            <path class="oak-branch__stroke" data-start="0.34" data-end="0.70"
+              d="M93 247 C109 309 115 346 151 396 C181 439 181 476 197 510"
+              stroke="#665b43" stroke-width="7" />
+            <path class="oak-branch__stroke" data-start="0.68" data-end="1"
+              d="M197 510 C219 559 246 586 264 645 C276 688 296 715 315 744"
+              stroke="#665b43" stroke-width="5" />
+            <path class="oak-branch__stroke" data-start="0.10" data-end="0.33"
+              d="M44 113 C86 96 114 66 125 25"
+              stroke="#687254" stroke-width="4" />
+            <path class="oak-branch__stroke" data-start="0.18" data-end="0.38"
+              d="M72 188 C40 173 19 145 13 111"
+              stroke="#687254" stroke-width="3.5" />
+            <path class="oak-branch__stroke" data-start="0.32" data-end="0.54"
+              d="M102 273 C150 255 187 227 199 177"
+              stroke="#687254" stroke-width="4.3" />
+            <path class="oak-branch__stroke" data-start="0.46" data-end="0.62"
+              d="M128 367 C79 370 44 350 27 317"
+              stroke="#687254" stroke-width="3.5" />
+            <path class="oak-branch__stroke" data-start="0.53" data-end="0.75"
+              d="M168 422 C217 412 251 383 264 333"
+              stroke="#687254" stroke-width="3.5" />
+            <path class="oak-branch__stroke" data-start="0.65" data-end="0.82"
+              d="M194 504 C144 510 103 480 88 450"
+              stroke="#687254" stroke-width="3" />
+            <path class="oak-branch__stroke" data-start="0.75" data-end="0.94"
+              d="M223 571 C271 547 299 524 312 484"
+              stroke="#687254" stroke-width="3.2" />
+            <path class="oak-branch__stroke" data-start="0.86" data-end="1"
+              d="M261 637 C227 646 204 675 195 702"
+              stroke="#687254" stroke-width="2.7" />
+            <path class="oak-branch__stroke" data-start="0.89" data-end="1"
+              d="M282 692 C325 672 353 634 365 592"
+              stroke="#687254" stroke-width="2.8" />
+          </g>
 
-    <!-- Kleine handschriftliche Notiz -->
-    <div class="editorial-note" aria-hidden="true">
-      Hoyerswerda
-      <span class="editorial-note-line"></span>
-    </div>
+          <g class="oak-branch__foliage">
+            <g transform="translate(125 27) rotate(13) scale(0.85)" style="color: #6c8859">
+              <g class="oak-branch__leaf" data-start="0.19" data-end="0.35">
+                <use href="#growing-oak-leaf-a" />
+              </g>
+            </g>
 
-    <!-- Botanischer Eichenzweig -->
-    <img
-  class="editorial-oak"
-  src="./assets/images/eichenzweig.svg"
-  alt=""
-  aria-hidden="true"
->
+            <g transform="translate(106 66) rotate(-60) scale(0.61)" style="color: #80985d">
+              <g class="oak-branch__leaf" data-start="0.24" data-end="0.40">
+                <use href="#growing-oak-leaf-b" />
+              </g>
+            </g>
 
-    <!-- Organisches Papieretikett -->
-    <div class="editorial-label">
-      <span>Garten isch des halbe Lebe</span>
-      <svg
-        class="editorial-label-underline"
-        viewBox="0 0 160 15"
-        aria-hidden="true"
-      >
-        <path
-          d="M3 10 Q45 3 83 8 T157 5"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-        />
+            <g transform="translate(13 113) rotate(-48) scale(0.69)" style="color: #688257">
+              <g class="oak-branch__leaf" data-start="0.28" data-end="0.44">
+                <use href="#growing-oak-leaf-a" />
+              </g>
+            </g>
+
+            <g transform="translate(37 150) rotate(-95) scale(0.57)" style="color: #91a16c">
+              <g class="oak-branch__leaf" data-start="0.33" data-end="0.50">
+                <use href="#growing-oak-leaf-b" />
+              </g>
+            </g>
+
+            <g transform="translate(199 177) rotate(27) scale(0.82)" style="color: #6b885b">
+              <g class="oak-branch__leaf" data-start="0.43" data-end="0.57">
+                <use href="#growing-oak-leaf-b" />
+              </g>
+            </g>
+
+            <g transform="translate(177 221) rotate(79) scale(0.59)" style="color: #859c65">
+              <g class="oak-branch__leaf" data-start="0.48" data-end="0.62">
+                <use href="#growing-oak-leaf-a" />
+              </g>
+            </g>
+
+            <g transform="translate(27 317) rotate(-46) scale(0.73)" style="color: #70895b">
+              <g class="oak-branch__leaf" data-start="0.55" data-end="0.70">
+                <use href="#growing-oak-leaf-a" />
+              </g>
+            </g>
+
+            <g transform="translate(66 355) rotate(-87) scale(0.54)" style="color: #879b66">
+              <g class="oak-branch__leaf" data-start="0.58" data-end="0.73">
+                <use href="#growing-oak-leaf-b" />
+              </g>
+            </g>
+
+            <g transform="translate(264 333) rotate(13) scale(0.79)" style="color: #728957">
+              <g class="oak-branch__leaf" data-start="0.64" data-end="0.78">
+                <use href="#growing-oak-leaf-a" />
+              </g>
+            </g>
+
+            <g transform="translate(236 390) rotate(78) scale(0.60)" style="color: #90a46d">
+              <g class="oak-branch__leaf" data-start="0.69" data-end="0.82">
+                <use href="#growing-oak-leaf-b" />
+              </g>
+            </g>
+
+            <g transform="translate(88 450) rotate(-52) scale(0.69)" style="color: #748d5a">
+              <g class="oak-branch__leaf" data-start="0.77" data-end="0.88">
+                <use href="#growing-oak-leaf-b" />
+              </g>
+            </g>
+
+            <g transform="translate(123 488) rotate(-88) scale(0.52)" style="color: #8da067">
+              <g class="oak-branch__leaf" data-start="0.80" data-end="0.91">
+                <use href="#growing-oak-leaf-a" />
+              </g>
+            </g>
+
+            <g transform="translate(312 484) rotate(25) scale(0.78)" style="color: #6e895c">
+              <g class="oak-branch__leaf" data-start="0.86" data-end="0.98">
+                <use href="#growing-oak-leaf-a" />
+              </g>
+            </g>
+
+            <g transform="translate(288 531) rotate(80) scale(0.53)" style="color: #96a46d">
+              <g class="oak-branch__leaf" data-start="0.88" data-end="1">
+                <use href="#growing-oak-leaf-b" />
+              </g>
+            </g>
+
+            <g transform="translate(195 702) rotate(-38) scale(0.69)" style="color: #71885a">
+              <g class="oak-branch__leaf" data-start="0.93" data-end="1">
+                <use href="#growing-oak-leaf-b" />
+              </g>
+            </g>
+
+            <g transform="translate(365 592) rotate(28) scale(0.71)" style="color: #849761">
+              <g class="oak-branch__leaf" data-start="0.94" data-end="1">
+                <use href="#growing-oak-leaf-a" />
+              </g>
+            </g>
+          </g>
+        </svg>
+
+        <span class="oak-branch__label oak-branch__label--verein"
+          data-start="0.48" data-end="0.57">Unser Verein</span>
+        <span class="oak-branch__label oak-branch__label--aktuelles"
+          data-start="0.68" data-end="0.77">Aktuelles</span>
+        <span class="oak-branch__label oak-branch__label--gaerten"
+          data-start="0.88" data-end="0.97">Freie Gärten</span>
+      </div>
+
+      <div id="verein" class="garden-hero__welcome home-intro container">
+        <div class="home-intro__text">
+          <h2 class="home-display">Zusammen<br>wächst mehr.</h2>
+          <p class="home-body">
+            Am 18. September 1990 wurde unser Kleingartenverein
+            „An der Eiche“ e. V. in Hoyerswerda gegründet.
+          </p>
+          <a class="home-link" href="./verein.html">
+            Mehr über unseren Verein
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 12h15m-6-6 6 6-6 6"
+                fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+
+        <figure class="home-intro__photo">
+          <div class="home-intro__photo-frame">
+            <img src="./assets/images/vereinsbilder/pflanze_hand.jpg"
+              alt="Hand mit kleiner Pflanze" loading="lazy" decoding="async">
+          </div>
+        </figure>
+      </div>
+
+      <svg class="home-wave home-wave--butter" viewBox="0 0 1440 110"
+        preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 65 C175 28 332 32 480 66 S782 110 970 62 S1264 30 1440 56 V110 H0Z"
+          fill="currentColor" />
       </svg>
-    </div>
+    </section>
 
-  </div>
-</div>
+    <section id="aktuelles" class="home-updates" aria-labelledby="updates-title">
+      <div class="container home-updates__inner">
+        <h2 id="updates-title" class="home-display home-updates__title">
+          Neues vom Gartenzaun.
+        </h2>
 
+        <div class="home-updates__columns">
+          <article class="home-feature">
+            <svg class="home-feature__icon" viewBox="0 0 64 64" aria-hidden="true">
+              <path d="m11 24 13-5 22-11 2 38-22-9-13-4Z" fill="#c65e3c" />
+              <path d="M12 20h10v23H12a7 7 0 0 1-7-7v-9a7 7 0 0 1 7-7Z" fill="#b24f35" />
+              <path d="M19 40h11l9 17H27Z" fill="#a94d35" />
+              <path d="M53 19l5-3M55 31h6M53 42l6 3"
+                stroke="#d07b4a" stroke-width="3" stroke-linecap="round" />
+            </svg>
 
-        </section>
-
-        <section id="aktuelles" class="updates section-space" aria-labelledby="updates-title">
-            <div class="container">
-                <p class="eyebrow">Das Vereinsleben</p>
-                <h2 id="updates-title">Was bei uns los ist</h2>
-
-                <div class="updates-grid">
-                    <article class="news-preview">
-                        <div class="photo-placeholder news-photo">
-                            <span>Platz für Vereinsmomente</span>
-                            <small>Fotos werden nachgereicht.</small>
-                        </div>
-                        <div>
-                            <h3>Neuigkeiten aus dem Verein</h3>
-                            <p>
-                                Hier informieren wir künftig über aktuelle Themen
-                                und Neuigkeiten aus dem Vereinsleben.
-                            </p>
-                        </div>
-                    </article>
-
-                    <div class="appointments">
-                        <h3>Die nächsten Termine</h3>
-                        <p class="empty-notice">
-                            Sobald die Termine feststehen, findest du hier
-                            Veranstaltungen und gemeinsame Arbeitseinsätze.
-                        </p>
-                        <span class="small-note">Termine folgen</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="gaerten" class="gardens section-space" aria-labelledby="gardens-title">
-            <div class="container gardens-inner">
-                <div>
-                    <p class="eyebrow">Freie Gärten</p>
-                    <h2 id="gardens-title">Ein Stück Grün.<br>Dein eigener Garten.</h2>
-                    <p>
-                        Du interessierst dich für einen Kleingarten?
-                        Hier stellen wir künftig verfügbare Gärten mit Bildern
-                        und weiteren Informationen vor.
-                    </p>
-                    <a class="button button-light" href="#kontakt">
-                        Kontakt zum Verein <span aria-hidden="true">↗</span>
-                    </a>
-                </div>
-
-                <div class="photo-placeholder garden-photo">
-                    <span>Raum für neue Gartenpläne</span>
-                    <small>Fotos und Angebote folgen.</small>
-                </div>
-            </div>
-        </section>
-
-        <section id="kontakt" class="container section-space contact-section">
             <div>
-                <p class="eyebrow">Gut zu wissen</p>
-                <h2>Der kurze Weg zu uns</h2>
+              <p class="home-eyebrow">Neuigkeiten</p>
+              <h3 class="home-feature__title">Was unseren Verein bewegt.</h3>
+              <p class="home-body">
+                Hier informieren wir künftig über aktuelle Entwicklungen,
+                Projekte und Themen aus unserem Vereinsleben.
+              </p>
             </div>
-            <p>
-                Die freigegebenen Kontaktdaten, Informationen zur Anfahrt
-                und Vereinsdokumente ergänzen wir hier im nächsten Schritt.
-            </p>
-        </section>
-    </main>
+          </article>
 
-    <footer class="site-footer">
-        <div class="container footer-inner">
-            <p class="footer-name">An der Eiche</p>
-            <p>Gestaltungsentwurf · Inhalte und Bilder folgen</p>
+          <article class="home-feature home-feature--date">
+            <svg class="home-feature__icon" viewBox="0 0 64 64" aria-hidden="true">
+              <rect x="8" y="12" width="48" height="45" rx="4" fill="#c75c3d" />
+              <rect x="14" y="27" width="36" height="24" rx="2" fill="#ffedbd" />
+              <path d="M21 7v13M44 7v13"
+                stroke="#89462c" stroke-width="6" stroke-linecap="round" />
+              <path d="M23 33v4m10-4v4m10-4v4M23 43v3m10-3v3m10-3v3"
+                stroke="#c75c3d" stroke-width="5" stroke-linecap="round" />
+            </svg>
+
+            <div>
+              <p class="home-eyebrow">Termine</p>
+              <h3 class="home-feature__title">Die nächsten Termine folgen.</h3>
+              <p class="home-body">
+                Hier findest du bald unsere anstehenden Veranstaltungen
+                und wichtigen Hinweise.
+              </p>
+            </div>
+          </article>
         </div>
-    </footer>
 
-    <svg class="svg-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-            <symbol id="oak-leaf" viewBox="0 0 80 100">
-                <path fill="currentColor" d="M39 88C25 84 15 77 18 70C7 69 5 59 15 54
-               C5 47 11 36 23 39C17 28 25 20 34 27
-               C31 13 39 4 45 10C52 1 61 10 56 23
-               C69 16 77 26 66 37C81 37 82 49 69 54
-               C81 62 73 73 61 70C65 82 53 89 43 88Z"></path>
-                <path d="M35 97L47 18M40 67L25 56M43 48L60 36" fill="none" stroke="var(--leaf-vein, #f5f3e9)"
-                    stroke-width="2" stroke-linecap="round"></path>
-            </symbol>
-        </defs>
-    </svg>
+        <a class="home-link" href="./aktuelles.html">
+          Alle Neuigkeiten &amp; Termine
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 12h15m-6-6 6 6-6 6"
+              fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+
+      <svg class="home-wave home-wave--sage" viewBox="0 0 1440 110"
+        preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 54 C168 93 370 85 552 61 S925 16 1130 54 S1340 74 1440 42 V110 H0Z"
+          fill="currentColor" />
+      </svg>
+    </section>
+
+    <section id="gaerten" class="home-gardens" aria-labelledby="gardens-title">
+      <div class="container home-gardens__inner">
+        <svg class="home-seedling" viewBox="0 0 360 300" aria-hidden="true">
+          <g fill="#664f3c">
+            <ellipse cx="177" cy="258" rx="104" ry="20" />
+            <ellipse cx="122" cy="246" rx="41" ry="27" />
+            <ellipse cx="210" cy="243" rx="49" ry="27" />
+            <ellipse cx="258" cy="258" rx="27" ry="14" />
+            <circle cx="68" cy="267" r="7" />
+            <circle cx="288" cy="281" r="5" />
+            <circle cx="115" cy="291" r="4" />
+          </g>
+
+          <g fill="#8b6b51">
+            <ellipse cx="144" cy="246" rx="38" ry="19" />
+            <ellipse cx="228" cy="256" rx="36" ry="15" />
+            <circle cx="102" cy="264" r="15" />
+          </g>
+
+          <path d="M179 235C177 199 174 158 180 102"
+            fill="none" stroke="#3d7041" stroke-width="12" stroke-linecap="round" />
+          <path d="M181 174C137 157 103 124 94 74C146 77 180 109 181 174Z"
+            fill="#5f9450" stroke="#376a39" stroke-width="4" />
+          <path d="M178 149C190 95 222 62 283 54C281 110 239 148 178 149Z"
+            fill="#4e8748" stroke="#326c3a" stroke-width="4" />
+          <path d="M180 172C146 135 126 112 101 91M181 148C214 111 237 91 276 66"
+            fill="none" stroke="#356c3b" stroke-width="3" stroke-linecap="round" />
+        </svg>
+
+        <div class="home-gardens__text">
+          <h2 id="gardens-title" class="home-display">Platz für neue Gartenpläne.</h2>
+          <h3 class="home-gardens__subheading">
+            Du interessierst dich für einen Kleingarten?
+          </h3>
+          <p class="home-body">
+            Aktuell bieten wir interessierten Gartenfreunden die Möglichkeit,
+            einen von 5 freien Gärten zu übernehmen.
+          </p>
+          <a class="home-pill" href="./gaerten.html">Freie Gärten ansehen</a>
+        </div>
+      </div>
+
+      <svg class="home-wave home-wave--forest" viewBox="0 0 1440 110"
+        preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 70 C224 30 350 42 558 73 S953 112 1160 57 S1351 32 1440 63 V110 H0Z"
+          fill="currentColor" />
+      </svg>
+    </section>
+
+    <section id="kontakt" class="home-contact" aria-labelledby="contact-title">
+      <div class="container home-contact__inner">
+        <div>
+          <h2 id="contact-title" class="home-display home-contact__title">
+            Lass uns ins Gespräch kommen.
+          </h2>
+          <p class="home-body">
+            Wir freuen uns auf deine Nachricht. Egal ob Frage, Anregung
+            oder einfach nur ein nettes Hallo.
+          </p>
+        </div>
+
+        <a class="home-pill home-pill--coral" href="./kontakt.html">
+          Zur Kontaktseite
+        </a>
+      </div>
+
+      <svg class="home-contact__decoration" viewBox="0 0 200 250" aria-hidden="true">
+        <path d="M95 250C120 168 112 88 78 0"
+          fill="none" stroke="currentColor" stroke-width="7" />
+        <use href="#oak-leaf" x="42" y="12" width="65" height="85" />
+        <use href="#oak-leaf" x="102" y="58" width="85" height="105" />
+        <use href="#oak-leaf" x="12" y="128" width="95" height="115" />
+      </svg>
+    </section>
+  </main>
+
+  <footer class="home-footer">
+    <div class="container home-footer__inner">
+      <div class="home-footer__brand">
+        <svg class="home-footer__brand-icon" viewBox="0 0 100 120" aria-hidden="true">
+          <path d="M15 47c2-21 24-36 46-34s30 14 30 28c-19-2-49-3-76 6Z"
+            fill="#f9f0d8" />
+          <path d="M16 52c-1 30 14 51 35 66 28-19 38-40 36-67-19-6-52-5-71 1Z"
+            fill="#f9f0d8" />
+          <path d="M14 53c22-10 53-11 76 0"
+            fill="none" stroke="#173a28" stroke-width="7" />
+          <path d="M49 13c-4-8 0-11 6-13"
+            fill="none" stroke="#f9f0d8" stroke-width="6" stroke-linecap="round" />
+        </svg>
+
+        <div>
+          <div class="home-footer__name">An der Eiche</div>
+          <div class="home-footer__subtitle">Kleingartenverein · Hoyerswerda</div>
+        </div>
+      </div>
+
+      <nav class="home-footer__links" aria-label="Rechtliches">
+        <a href="./impressum.html">Impressum</a>
+        <span aria-hidden="true">|</span>
+        <a href="./datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+  </footer>
+
+  <svg class="svg-definitions" xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="oak-leaf" viewBox="0 0 80 100">
+        <path
+          d="M39 88C25 84 15 77 18 70C7 69 5 59 15 54 C5 47 11 36 23 39C17 28 25 20 34 27 C31 13 39 4 45 10C52 1 61 10 56 23 C69 16 77 26 66 37C81 37 82 49 69 54 C81 62 73 73 61 70C65 82 53 89 43 88Z"
+          fill="currentColor" />
+        <path d="M35 97L47 18M40 67L25 56M43 48L60 36"
+          fill="none" stroke="var(--leaf-vein, #f5f3e9)"
+          stroke-width="2" stroke-linecap="round" />
+      </symbol>
+    </defs>
+  </svg>
 </body>
 
 </html>

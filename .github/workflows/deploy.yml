@@ -13,6 +13,16 @@ jobs:
     steps:
       - name: Repository herunterladen
         uses: actions/checkout@v4
+        
+      - name: SSH Host-Key vorbereiten
+        env:
+          SFTP_HOST: ${{ secrets.SFTP_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan -p 22 -H "$SFTP_HOST" > /tmp/ionos_host_keys
+          ssh-keygen -lf /tmp/ionos_host_keys
+
 
       - name: SFTP Deployment
         env:

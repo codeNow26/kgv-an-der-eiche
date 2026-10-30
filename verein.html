@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./styles/subpages.css">
   <link rel="stylesheet" href="./styles/verein.css">
+  <link rel="stylesheet" href="./styles/club-history.css">
 
   <script src="./script.js" defer></script>
 </head>
@@ -169,47 +170,50 @@
       </svg>
     </section>
 
-    <section id="kennenlernen" class="club-story"
-      aria-labelledby="story-title">
-      <div class="container club-story__layout">
-        <div class="club-story__date">
-  <div class="club-foundation">
-    <span class="club-foundation__label">Gegründet am</span>
-
-    <time class="club-foundation__date" datetime="1990-09-18">
-      <span class="club-foundation__day">18. September</span>
-      <span class="club-foundation__year">1990</span>
-    </time>
-
-    <svg class="club-foundation__acorn" viewBox="0 0 48 58"
-      aria-hidden="true" focusable="false">
-      <use href="#acorn"></use>
-    </svg>
-  </div>
-</div>
-
-        <div class="club-story__copy">
-          <p class="page-eyebrow">Unsere Wurzeln</p>
-          <h2 id="story-title" class="page-heading">
-            In Hoyerswerda<br>verwurzelt.
-          </h2>
-          <p>
-            Am 18. September 1990 wurde unser Kleingartenverein
-            „An der Eiche“ e. V. in Hoyerswerda gegründet.
-          </p>
-          <a class="page-text-link" href="./aktuelles.html">
-            Aktuelles aus dem Verein
-            <span aria-hidden="true">↗</span>
-          </a>
+   <section
+    id="kennenlernen"
+    class="club-history"
+    aria-labelledby="history-title"
+>
+    <div class="container club-history__layout">
+        <div class="club-history__date">
+            <span>Seit</span>
+            <time datetime="1990-09-18">1990</time>
         </div>
-      </div>
 
-      <svg class="page-wave" viewBox="0 0 1440 90"
-        preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 35C290 93 460 5 760 42S1210 95 1440 30V90H0Z"
-          fill="currentColor"></path>
-      </svg>
-    </section>
+        <div class="club-history__copy">
+            <h2 id="history-title" class="page-heading">
+                Ein grünes Stück Heimat.
+            </h2>
+
+            <p>
+                Am 18. September 1990 wurde unser Kleingartenverein
+                „An der Eiche“ e. V. in Hoyerswerda gegründet. Unsere
+                Gartenanlage liegt an der Heinrich-Heine-Straße.
+            </p>
+
+            <p>
+                Obst und Gemüse anbauen, im eigenen Garten zur Ruhe
+                kommen oder bei Arbeitseinsätzen gemeinsam anpacken:
+                Bei uns kommen Menschen verschiedener Generationen
+                zusammen, die Freude am Gärtnern haben.
+            </p>
+        </div>
+    </div>
+
+    <svg
+        class="page-wave"
+        viewBox="0 0 1440 90"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        focusable="false"
+    >
+        <path
+            d="M0 35C290 93 460 5 760 42S1210 95 1440 30V90H0Z"
+            fill="currentColor"
+        ></path>
+    </svg>
+</section>
 
     <section class="club-invitation" aria-labelledby="invitation-title">
   <div class="container club-invitation__inner">

@@ -1,0 +1,82 @@
+.club-history {
+  background-color: var(--page-green);
+  color: #fff4df;
+}
+
+.club-history__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.3fr);
+  align-items: center;
+  gap: clamp(40px, 8vw, 120px);
+  padding-block: 40px 30px;
+}
+
+.club-history__date {
+  color: #dce5b0;
+}
+
+.club-history__date span {
+  display: block;
+  margin-bottom: 8px;
+  font-family: "Barlow Condensed", Arial, sans-serif;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.club-history__date time {
+  display: block;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(80px, 9vw, 128px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.club-history__copy {
+  max-width: 610px;
+  min-width: 0;
+}
+
+.club-history__copy .page-heading {
+  margin-bottom: 24px;
+}
+
+.club-history__copy p {
+  margin-bottom: 18px;
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.club-history__copy p:last-child {
+  margin-bottom: 0;
+}
+
+.club-history > .page-wave {
+  color: var(--page-cream);
+}
+
+@media (max-width: 900px) {
+  .club-history__layout {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 700px) {
+  .club-history__layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-block: 28px 32px;
+  }
+
+  .club-history__date span {
+    font-size: 20px;
+  }
+
+  .club-history__date time {
+    font-size: clamp(76px, 20vw, 104px);
+  }
+
+  .club-history__copy p {
+    font-size: 17px;
+  }
+}
